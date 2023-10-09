@@ -10,7 +10,7 @@ library(ggplot2)
 # Storing the data
 raw_data <- readLines("suites_dw_Table1.txt")
 
-# Saving variable descriptions as a new value
+# Storing variable descriptions as a new value
 variable_descriptions <- raw_data[1:11] 
 
 # Saving variable descriptions in a new txt file
@@ -27,6 +27,15 @@ raw_data %>% cat(file = "Galaxies.csv", sep = "\n")
 ## Reading .csv and storing it as a df
 galaxies <- read.csv("Galaxies.csv", sep = "|", header = TRUE)
 
+# Creating plot
+galaxies %>% ggplot() + 
+  # Scatterplot
+  geom_point(aes(x = log_m26, y = a_26)) + 
+  # Emphasizes the representation of smaller galaxies
+  scale_x_continuous(limits = c(0, NA))
+
+# We know that log_m26 is an indicator of mass. This plot reveals that there
+# are no galaxies in the data set with a log_m26 value of less then 5.
 
 
 
